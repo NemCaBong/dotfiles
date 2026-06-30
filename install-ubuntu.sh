@@ -25,7 +25,8 @@ sudo apt install -y \
   gnupg \
   ca-certificates \
   apt-transport-https \
-  software-properties-common
+  software-properties-common \
+  copyq
 
 # install docker
 curl -fsSL https://get.docker.com | sh
@@ -62,4 +63,14 @@ curl -fsSL https://pyenv.run | bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
 
 
+# chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
 
+# ibus bamboo
+sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo
+sudo apt-get update
+sudo apt-get install ibus ibus-bamboo --install-recommends
+ibus restart
+# Đặt ibus-bamboo làm bộ gõ mặc định
+env DCONF_PROFILE=ibus dconf write /desktop/ibus/general/preload-engines "['BambooUs', 'Bamboo']" && gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'Bamboo')]"
